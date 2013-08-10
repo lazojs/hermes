@@ -1,0 +1,56 @@
+{
+  "name": "hermes",
+  "description": "simple push state based client routing",
+  "version": "0.0.1",
+  "main": "hermes.js",
+  "keywords": [
+    "pushstate",
+    "router",
+    "routing",
+    "backbone"
+  ],
+  "licenses": [
+    {
+      "type": "MIT",
+      "url": "license.txt"
+    }
+  ],
+  "author": {
+    "name": "Jason Strimpel",
+    "email": "jstrimpel@gmail.com"
+  },
+  "bugs": {
+    "web": ""
+  },
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "github": "",
+  "devDependencies": {
+    "grunt": "~0.4.0",
+    "grunt-contrib-jasmine": "~0.4.2",
+    "grunt-contrib-jshint": "~0.1.1",
+    "grunt-plato": "~0.1.4",
+    "grunt-contrib-uglify": "~0.2.0",
+    "grunt-contrib-concat": "~0.1.2",
+    "grunt-template-jasmine-istanbul": "~0.1.1",
+    "grunt-contrib-watch": "~0.2.0"
+  },
+  "volo": {
+    "url": ""
+  },
+  "jam": {
+    "main": "hermes.js",
+    "include": [
+      "hermes.js",
+      "readme.md"
+    ]
+  },
+  "maintainers": [
+    {
+      "name": "Jason Strimpel",
+      "email": "jstrimpel@gmail.com"
+    }
+  ]
+}
