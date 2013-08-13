@@ -62,7 +62,8 @@
 
         route: function (route, name, callback) {
             var args,
-                self = this;
+                self = this,
+                pathParamsKeys = route.match(/:\w*/g) || [];
             route = !isRegExp(route) ? this._routeToRegExp(route) : route;
             if (isFunction(name)) {
                 callback = name;
@@ -70,7 +71,7 @@
             }
 
             this._handlers.unshift({ route: route, callback: function (data) {
-                args = self._getParams();
+                args = self._getParams(route, pathParamsKeys);
                 if (isFunction(callback)) {
                     callback.apply(self, [window.location.pathname, args, data]);
                 }
@@ -125,13 +126,19 @@
             return window.location.pathname + window.location.search;
         },
 
-        _getParams: function (urlParts) {
+        _getParams: function (route, pathParamsKeys) {
             var match,
                 pl     = /\+/g,  // Regex for replacing addition symbol with a space
                 search = /([^&=]+)=?([^&]*)/g,
                 decode = function (s) { return decodeURIComponent(s.replace(pl, ' ')); },
-                query  = urlParts ? urlParts.search.substring(1) : window.location.search.substring(1),
-                params = {};
+                query  = window.location.search.substring(1),
+                params = {},
+                pathParams;
+
+            pathParams = route.exec(this._stripRoot(window.location.pathname)).slice(1);
+            for (var i = 0; i < pathParamsKeys.length; i++) {
+                params[pathParamsKeys[i].substring(1)] = pathParams[i] || null;
+            }
 
             while ((match = search.exec(query))) {
                 params[decode(match[1])] = decode(match[2]);
@@ -203,29 +210,12 @@
             return this;
         },
 
-        _isNewUrl: function () {
-            var currentParams = this._getParams(),
-                prevParms = this._getParams(this._lastUrl);
-            if (!this.onNewUrlOnly) {
-                return true;
-            }
-
-            for (var k in currentParams) {
-                if (currentParams[k] !== prevParams[k]) {
-                    return true;
-                }
-            }
-
-            return window.location.pathname !== this._lastUrl.pathname;
-        },
-
         _loadUrl: function (state) {
             var handlers = this._handlers,
                 routePathName = this._stripRoot(window.location.pathname),
                 len = routePathName ? handlers.length : 0;
 
             state = state || {};
-            len = this._isNewUrl() ? len : 0;
             for (var i = 0; i < len; i++) {
                 if (handlers[i].route.test(routePathName)) {
                     handlers[i].callback(state);

@@ -20,7 +20,7 @@ to support [hybrid web applications](https://blog.twitter.com/2012/implementing-
 When a route handler is called it is passed three arguments:
 
 * pathname
-* parameters object (contains the values from window.location.search)
+* parameters object (contains named path parameters and the values from window.location.search [given precedence over path parameters])
 * state object
 
 ### hermes.start(options)
