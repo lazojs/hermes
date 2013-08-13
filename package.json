@@ -1,6 +1,6 @@
 {
-  "name": "hermes",
-  "description": "simple push state based client routing",
+  "name": "hermes-conrad",
+  "description": "simple pushstate based client routing",
   "version": "0.0.1",
   "main": "hermes.js",
   "keywords": [
@@ -12,7 +12,7 @@
   "licenses": [
     {
       "type": "MIT",
-      "url": "license.txt"
+      "url": "https://github.com/jstrimpel/hermes/blob/master/license.txt"
     }
   ],
   "author": {
@@ -20,13 +20,13 @@
     "email": "jstrimpel@gmail.com"
   },
   "bugs": {
-    "web": ""
+    "web": "https://github.com/jstrimpel/hermes/issues"
   },
   "repository": {
     "type": "git",
-    "url": ""
+    "url": "https://github.com/jstrimpel/hermes.git"
   },
-  "github": "",
+  "github": "https://github.com/jstrimpel/hermes",
   "devDependencies": {
     "grunt": "~0.4.0",
     "grunt-contrib-jasmine": "~0.4.2",
@@ -38,7 +38,7 @@
     "grunt-contrib-watch": "~0.2.0"
   },
   "volo": {
-    "url": ""
+    "url": "https://raw.github.com/jstrimpel/hermes/master/hermes.js"
   },
   "jam": {
     "main": "hermes.js",

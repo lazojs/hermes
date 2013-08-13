@@ -104,6 +104,11 @@
             return this._cache[url || this._getUrl()];
         },
 
+        clearCache: function () {
+            this._cache = {};
+            return this;
+        },
+
         _setCacheItem: function (title, state) {
             var item = this._cache[this._getUrl()] = {
                 title: title
@@ -169,15 +174,18 @@
 
             augment(this, Backbone.Events);
             this._backboneEventsAugmented = true;
+            return this;
         },
 
         _bindPopState: function () {
             var self = this;
 
             this._popstateListener = window.addEventListener('popstate', function (e) {
+                var item = self.getItem();
                 self._loadUrl(e.state);
-                document.title = self.getItem().title;
+                document.title = item ? item.title : document.title;
             });
+            return this;
         },
 
         _bindRoutes: function () {
