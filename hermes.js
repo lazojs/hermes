@@ -76,6 +76,7 @@
                 name = '';
             }
 
+            this._handlers = this._handlers || []; // routes assigned before start is called
             this._handlers.unshift({ route: route, callback: function (data) {
                 args = self._getParams(route, pathParamsKeys);
                 if (isFunction(callback)) {
@@ -166,6 +167,8 @@
 
         _stripRoot: function (pathname) {
             var root;
+
+            pathname = pathname.substring(0, 1) === '/' ? pathname.substring(1) : pathname;
             if (!this.root) {
                 return pathname;
             }
