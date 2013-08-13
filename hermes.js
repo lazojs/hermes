@@ -7,9 +7,11 @@
 ;(function (window) {
     var hermes;
 
-    function augment(receiver, giver) {
+    function augment(receiver, giver, exclude) {
         for (var k in giver) {
-            receiver[k] = giver[k];
+            if (!exclude || !exclude[k]) {
+                receiver[k] = giver[k];
+            }
         }
 
         return receiver;
@@ -41,9 +43,14 @@
 
             options = options || {};
             this._handlers = this._handlers || [];
-            augment(this, options);
+            this._cache = this._cache || {};
+            augment(this, options, { state: true, title: true });
             this.root = this.root ? ('/' + this.root + '/').replace(rootStripper, '/') : void 0;
-            window.history.replaceState(options.data || {}, document.title, window.location.pathname + window.location.search);
+            options.state = options.state || {};
+            options.title = options.title || document.title;
+            window.history.replaceState(options.state || {}, options.title, this._getUrl());
+            document.title = options.title;
+            this._setCacheItem(options.title, options.state);
             this._lastUrl = { pathname: window.location.pathname, search: window.location.search };
             self._backboneEvents();
             self._bindRoutes();
@@ -86,13 +93,42 @@
             this._handlers = [];
         },
 
-        navigate: function (pathname, options) {
+        navigate: function (url, options) {
+            var title;
             options = options || {};
             options.state = options.state || {};
-            window.history[options.replace ? 'replaceState' : 'pushState'](options.state, document.title, pathname);
+            options.title = options.title || document.title;
+            window.history[options.replace ? 'replaceState' : 'pushState'](options.state, options.title, url);
+            document.title = options.title;
+            this._setCacheItem(options.title, options.state);
             if (options.trigger === void 0 || options.trigger) {
                 this._loadUrl(options.state);
             }
+        },
+
+        getItem: function (url) {
+            return this._cache[url || this._getUrl()];
+        },
+
+        clearCache: function () {
+            this._cache = {};
+            return this;
+        },
+
+        _setCacheItem: function (title, state) {
+            var item = this._cache[this._getUrl()] = {
+                title: title
+            };
+
+            if (this.cache) {
+                item.state = state;
+            }
+
+            return this;
+        },
+
+        _getUrl: function () {
+            return window.location.pathname + window.location.search;
         },
 
         _getParams: function (urlParts) {
@@ -144,14 +180,18 @@
 
             augment(this, Backbone.Events);
             this._backboneEventsAugmented = true;
+            return this;
         },
 
         _bindPopState: function () {
             var self = this;
 
             this._popstateListener = window.addEventListener('popstate', function (e) {
+                var item = self.getItem();
                 self._loadUrl(e.state);
+                document.title = item ? item.title : document.title;
             });
+            return this;
         },
 
         _bindRoutes: function () {

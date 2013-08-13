@@ -1,0 +1,27 @@
+{
+  "name"        : "hermes-conrad",
+  "description" : "simple pushstate based client routing",
+  "url"         : "https://github.com/jstrimpel/hermes",
+  "main"        : "hermes.js",
+  "version"     : "0.0.1",
+
+  "keywords"    : [
+    "pushstate",
+    "router",
+    "routing",
+    "backbone"
+  ],
+
+  "author": {
+    "name"  : "Jason Strimpel",
+    "email" : "jstrimpel@gmail.com"
+  },
+
+  "ignore": [
+    "reports",
+    "spec",
+    ".gitignore",
+    "changelog.md",
+    "package.json"
+  ]
+}

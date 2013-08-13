@@ -7,7 +7,7 @@ A simple pushstate based client router.
 Hermes is Backbone inspired client router for pushstate clients. Hermes was built
 to support [hybrid web applications](https://blog.twitter.com/2012/implementing-pushstate-twittercom).
 
-* Hermes is a simple object - I don't need no stinking constructors in prototypal inheritence
+* Hermes is a simple object - I don't need no stinking constructors
 * Hermes uses Backbone style route definitions
 * Hermes always triggers a handler if a route is matched unless told otherwise - no more passing trigger for every single navigate
 * Hermes accepts a state object
@@ -31,7 +31,8 @@ hermes.start({
    routes: {}, // routes table
    title: '', // title for current page
    state: {}, // state object for the current page
-   cache: false // keep cache of state objects in addition to those stored in the history
+   cache: false, // keep cache of state objects in addition to those stored in the history
+   Backbone: Backbone // optionally pass in a reference to Backbone to trigger Backbone router like events
 });
 ```
 
