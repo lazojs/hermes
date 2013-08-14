@@ -222,7 +222,7 @@
         _loadUrl: function (state) {
             var handlers = this._handlers,
                 routePathName = this._stripRoot(window.location.pathname),
-                len = routePathName ? handlers.length : 0;
+                len = handlers.length;
 
             state = state || {};
             for (var i = 0; i < len; i++) {
