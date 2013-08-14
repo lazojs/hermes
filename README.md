@@ -37,7 +37,7 @@ hermes.start({
 ```
 
 ### hermes.stop()
-Unbinds handler popstate.
+Unbinds popstate handler.
 
 ### hermes.route(route, name, callback)
 Adds a route handler to Hermes.
@@ -49,7 +49,7 @@ Deletes route handlers.
 Calls matching route handler if one is defined.
 
 ```javascript
-hermes.navigate({
+hermes.navigate(url, {
     title: '', // page title to associate to url
     state: {}, // state object to associate to url
     trigger: true // execute route handler; default is true
