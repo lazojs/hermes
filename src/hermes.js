@@ -111,7 +111,13 @@
             return this;
         },
 
-        _setCacheItem: function (title, state) {
+        updateState: function (state, url) {
+            var item = this.getItem(url);
+            this._setCacheItem(item.title, state, url);
+            window.history.replaceState(state, item.title, (url || this._getUrl()));
+        },
+
+        _setCacheItem: function (title, state, url) {
             var item = this._cache[this._getUrl()] = {
                 title: title
             };

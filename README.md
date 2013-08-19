@@ -59,5 +59,8 @@ hermes.navigate(url, {
 ### hermes.getItem(url)
 Gets cached object for url.
 
+### hermes.updateState(state, title, [url])
+Updates the state object for the current url or the url specified. Url = window.location.pathname + window.location.search.
+
 ### hermes.clearCache()
 Deletes cache object.
