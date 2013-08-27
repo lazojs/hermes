@@ -97,6 +97,10 @@
 
         navigate: function (url, options) {
             var title;
+            if (!window.history.pushState) { // for browsers that do not support push state
+                window.location = url;
+            }
+
             options = options || {};
             options.state = options.state || {};
             options.title = options.title || document.title;
@@ -124,7 +128,7 @@
         },
 
         _setCacheItem: function (title, state, url) {
-            var item = this._cache[this._getUrl()] = {
+            var item = this._cache[url || this._getUrl()] = {
                 title: title
             };
 
