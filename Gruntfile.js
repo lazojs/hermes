@@ -44,6 +44,10 @@ module.exports = function (grunt) {
             dev: {
                 src: 'src/hermes.js',
                 dest: 'hermes.js'
+            },
+            'amd-dev': {
+                src: 'hermes.amd.js',
+                dest: 'hermes.amd.js'
             }
         },
         jshint: {
@@ -66,5 +70,5 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-preprocess');
-    grunt.registerTask('default', ['jshint', 'jasmine', 'preprocess', 'uglify:prod', 'uglify:amd', 'concat']);
+    grunt.registerTask('default', ['jshint', 'jasmine', 'preprocess', 'concat:amd-dev', 'uglify:prod', 'uglify:amd', 'concat:dev']);
 };
