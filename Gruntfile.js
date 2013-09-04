@@ -14,7 +14,7 @@ module.exports = function (grunt) {
             '// Distributed under MIT license\n'
         },
         jasmine : {
-            src : 'src/**/*.js',
+            src : 'src/hermes.js',
             options : {
                 specs : 'spec/**/*.js',
                 template : require('grunt-template-jasmine-istanbul'),
@@ -31,6 +31,10 @@ module.exports = function (grunt) {
             prod: {
                 src: 'src/hermes.js',
                 dest: 'hermes.min.js'
+            },
+            amd: {
+                src: 'hermes.amd.js',
+                dest: 'hermes.amd.min.js'
             }
         },
         concat: {
@@ -43,7 +47,17 @@ module.exports = function (grunt) {
             }
         },
         jshint: {
-            hermes : [ 'src/*.js' ]
+            options: {
+                jshintrc: '.jshintrc'
+            },
+            hermes: [ 'src/*.js' ]
+        },
+        preprocess: {
+            amd: {
+                files: {
+                    'hermes.amd.js': 'src/hermes.amd.js'
+                }
+            }
         }
     });
 
@@ -51,5 +65,6 @@ module.exports = function (grunt) {
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
-    grunt.registerTask('default', ['jshint', 'jasmine', 'uglify', 'concat']);
+    grunt.loadNpmTasks('grunt-preprocess');
+    grunt.registerTask('default', ['jshint', 'jasmine', 'preprocess', 'uglify:prod', 'uglify:amd', 'concat']);
 };
