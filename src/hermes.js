@@ -44,7 +44,7 @@ hermes = {
         window.history.replaceState(options.state || {}, options.title, this._getUrl());
         document.title = options.title;
         this._setCacheItem(options.title, options.state);
-        this._lastUrl = { pathname: window.location.pathname, search: window.location.search };
+        this._currentUrl = { pathname: window.location.pathname, search: window.location.search };
         self._backboneEvents();
         self._bindRoutes();
         setTimeout(function () {
@@ -52,6 +52,14 @@ hermes = {
         }, 0);
         this._started = true;
         return this;
+    },
+
+    getPreviousUrl: function () {
+        if (!this._lastUrl) {
+            return '';
+        }
+
+        return this._lastUrl.pathname + this._lastUrl.search;
     },
 
     stop: function () {
@@ -231,7 +239,8 @@ hermes = {
         for (var i = 0; i < len; i++) {
             if (handlers[i].route.test(routePathName)) {
                 handlers[i].callback(state);
-                this._lastUrl = { pathname: window.location.pathname, search: window.location.search };
+                this._lastUrl = { pathname: this._currentUrl.pathname, search: this._currentUrl.search };
+                this._currentUrl = { pathname: window.location.pathname, search: window.location.search };
                 break;
             }
         }

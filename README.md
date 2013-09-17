@@ -64,3 +64,6 @@ Updates the state object for the current url or the url specified. Url = window.
 
 ### hermes.clearCache()
 Deletes cache object.
+
+### herems.getPreviousUrl()
+Gets the previous Url. Useful for looking up the previous page's cache item.
