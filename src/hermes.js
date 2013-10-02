@@ -129,6 +129,8 @@ hermes = {
         window.history.replaceState(state, item.title, (url || this._getUrl()));
     },
 
+    routeNotMatched: function (routePathName) {},
+
     _setCacheItem: function (title, state, url) {
         var item = this._cache[url || this._getUrl()] = {
             title: title
@@ -242,10 +244,11 @@ hermes = {
                 handlers[i].callback(state);
                 this._lastUrl = { pathname: this._currentUrl.pathname, search: this._currentUrl.search };
                 this._currentUrl = { pathname: window.location.pathname, search: window.location.search };
-                break;
+                return this;
             }
         }
 
+        this.routeNotMatched(routePathName);
         return this;
     }
 
