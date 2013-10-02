@@ -100,6 +100,7 @@ hermes = {
         var title;
         if (!window.history.pushState) { // for browsers that do not support push state
             window.location = url;
+            return;
         }
 
         options = options || {};
