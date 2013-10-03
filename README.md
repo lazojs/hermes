@@ -32,7 +32,11 @@ hermes.start({
    title: '', // title for current page
    state: {}, // state object for the current page
    cache: false, // keep cache of state objects in addition to those stored in the history
-   Backbone: Backbone // optionally pass in a reference to Backbone to trigger Backbone router like events
+   routeNotMatched: function (routePathName) {
+      // do something if a route is not matched, e.g., render 404 page
+   }
+}
+
 });
 ```
 
