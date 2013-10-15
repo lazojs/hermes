@@ -31,7 +31,7 @@ hermes.start({
    routes: {}, // routes table
    title: '', // title for current page
    state: {}, // state object for the current page
-   cache: false, // keep cache of state objects in addition to those stored in the history
+   cache: false, // keep cache of state objects in addition to those stored in the history (stores page title regardless)
    routeNotMatched: function (routePathName) {
       // do something if a route is not matched, e.g., render 404 page
    }
