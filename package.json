@@ -1,7 +1,7 @@
 {
   "name": "hermes-conrad",
   "description": "simple pushstate based client routing",
-  "version": "0.1.3",
+  "version": "0.1.4",
   "main": "hermes.js",
   "keywords": [
     "pushstate",
