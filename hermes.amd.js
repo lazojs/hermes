@@ -1,8 +1,8 @@
 // HERMES, sweet llamas of the bahamas
 // ----------------------------------
-// v0.1.3
+// v0.1.4
 //
-// Copyright (c)2013 Jason Strimpel
+// Copyright (c)2014 Jason Strimpel
 // Distributed under MIT license
 define(function () {
 
@@ -50,7 +50,7 @@ define(function () {
             augment(this, options, { state: true, title: true });
             this.root = this.root ? ('/' + this.root + '/').replace(rootStripper, '/') : void 0;
             options.state = options.state || {};
-            options.title = options.title || document.title;
+            options.state.title = options.title = options.title || document.title;
             window.history.replaceState(options.state || {}, options.title, this._getUrl());
             document.title = options.title;
             this._setCacheItem(options.title, options.state);
@@ -115,7 +115,7 @@ define(function () {
     
             options = options || {};
             options.state = options.state || {};
-            options.title = options.title || document.title;
+            options.state.title = options.title = options.title || document.title;
             window.history[options.replace ? 'replaceState' : 'pushState'](options.state, options.title, url);
             document.title = options.title;
             this._setCacheItem(options.title, options.state);
@@ -134,9 +134,11 @@ define(function () {
         },
     
         updateState: function (state, url) {
-            var item = this.getItem(url);
-            this._setCacheItem(item.title, state, url);
-            window.history.replaceState(state, item.title, (url || this._getUrl()));
+            var item = this.getItem(url),
+                title = item ? item.title : state.title;
+    
+            this._setCacheItem(title, state, url);
+            window.history.replaceState(state, title, (url || this._getUrl()));
         },
     
         routeNotMatched: function (routePathName) {},
@@ -263,6 +265,7 @@ define(function () {
         }
     
     };
+    
 
     return hermes;
 
