@@ -3,7 +3,7 @@
   "description" : "simple pushstate based client routing",
   "url"         : "https://github.com/jstrimpel/hermes",
   "main"        : "hermes.js",
-  "version"     : "0.0.1",
+  "version"     : "0.1.5",
 
   "keywords"    : [
     "pushstate",
