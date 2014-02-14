@@ -43,4 +43,22 @@ describe('hermes', function () {
         expect(window.hermes._handlers.length).toEqual(1);
     });
 
+    describe('#updateState', function(){
+        it('should handle an empty cache', function(){
+            var spy = spyOn(window.history, 'replaceState')
+                    .andCallFake(function(){}),
+                state = {
+                    title: 'Test',
+                    state: 'foo'
+                },
+                url = '/hermes.html';
+
+            hermes.clearCache();
+
+            hermes.updateState(state, url);
+
+            expect(spy).toHaveBeenCalledWith(state, state.title, url);
+        });
+    });
+
 });
