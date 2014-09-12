@@ -28,6 +28,7 @@ Binds popstate handler and processes options.
 
 ```javascript
 hermes.start({
+  routeOnHashChange: true, // execute matched route when hash changes; defaults to false
    routes: {}, // routes table
    title: '', // title for current page
    state: {}, // state object for the current page

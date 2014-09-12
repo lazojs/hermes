@@ -1,6 +1,6 @@
 // HERMES, sweet llamas of the bahamas
 // ----------------------------------
-// v0.1.4
+// v0.1.5
 //
 // Copyright (c)2014 Jason Strimpel
 // Distributed under MIT license
@@ -47,8 +47,10 @@ define(function () {
             options = options || {};
             this._handlers = this._handlers || [];
             this._cache = this._cache || {};
+            options.routeOnHashChange = options.routeOnHashChange || false;
             augment(this, options, { state: true, title: true });
             this.root = this.root ? ('/' + this.root + '/').replace(rootStripper, '/') : void 0;
+            options.routeOnHashChange = options.routeOnHashChange || false;
             options.state = options.state || {};
             options.state.title = options.title = options.title || document.title;
             window.history.replaceState(options.state || {}, options.title, this._getUrl());
@@ -249,6 +251,12 @@ define(function () {
             var handlers = this._handlers,
                 routePathName = this._stripRoot(window.location.pathname),
                 len = handlers.length;
+    
+            if (!this.routeOnHashChange &&
+                this._currentUrl.pathname === window.location.pathname &&
+                this._currentUrl.search === window.location.search) {
+                return this;
+            }
     
             state = state || {};
             for (var i = 0; i < len; i++) {
