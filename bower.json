@@ -1,9 +1,9 @@
 {
   "name"        : "hermes-conrad",
   "description" : "simple pushstate based client routing",
-  "url"         : "https://github.com/jstrimpel/hermes",
+  "url"         : "https://github.com/lazojs/hermes",
   "main"        : "hermes.js",
-  "version"     : "0.2.0",
+  "version"     : "1.0.0",
 
   "keywords"    : [
     "pushstate",

@@ -1,8 +1,8 @@
 // HERMES, sweet llamas of the bahamas
 // ----------------------------------
-// v0.1.5
+// v1.0.0
 //
-// Copyright (c)2014 Jason Strimpel
+// Copyright (c)2015 Jason Strimpel
 // Distributed under MIT license
 define(function () {
 

@@ -1,6 +1,11 @@
-# hermes
+<h1>
+  hermes
+  <a title='Build Status' href="https://travis-ci.org/lazojs/hermes">
+    <img src='https://travis-ci.org/lazojs/hermes.svg' />
+  </a>
+</h1>
 
-A simple pushstate based client router.
+> Sweet three-toed sloth of the ice planet Hoth!
 
 ## about hermes
 
