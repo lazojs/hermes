@@ -1,6 +1,6 @@
 // HERMES, sweet llamas of the bahamas
 // ----------------------------------
-// v1.0.0
+// v1.0.1
 //
 // Copyright (c)2015 Jason Strimpel
 // Distributed under MIT license
@@ -82,7 +82,8 @@ define(function () {
         route: function (route, name, callback) {
             var args,
                 self = this,
-                pathParamsKeys = route.match(/:\w*/g) || [];
+                splatPathParamsKeys = route.match(splatParam) || [],
+                pathParamsKeys = splatPathParamsKeys.concat(route.match(/:\w*/g) || []);
             route = !isRegExp(route) ? this._routeToRegExp(route) : route;
             if (isFunction(name)) {
                 callback = name;
