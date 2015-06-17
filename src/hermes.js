@@ -72,7 +72,7 @@ hermes = {
     route: function (route, name, callback) {
         var args,
             self = this,
-            splatPathParamsKeys = route.match(splatParam) || [],
+            splatPathParamsKeys = route.match(/:\w*|\*\w+/g) || [],
             pathParamsKeys = splatPathParamsKeys.concat(route.match(/:\w*/g) || []);
         route = !isRegExp(route) ? this._routeToRegExp(route) : route;
         if (isFunction(name)) {
